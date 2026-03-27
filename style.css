@@ -1,0 +1,607 @@
+/* Netflix-inspired styles */
+
+/* ===== TEMAS - DARK MODE E LIGHT MODE ===== */
+
+/* Tema Padrão (Dark Mode) */
+:root,
+html[data-theme="dark"] {
+  --bg-gradient-1: #222;
+  --bg-gradient-2: #111;
+  --bg-gradient-3: #090909;
+  --bg: #141414;
+  --card: #1f1f1f;
+  --card-hover: #2a2a2a;
+  --text: #ffffff;
+  --muted: #8a8a8a;
+  --accent: #ffffff;
+  --toggle-bg: #333333;
+  --toggle-border: #555555;
+  --toggle-thumb: #ffffff;
+}
+
+/* Tema Light Mode */
+html[data-theme="light"] {
+  --bg-gradient-1: #f5f5f5;
+  --bg-gradient-2: #e8e8e8;
+  --bg-gradient-3: #ffffff;
+  --bg: #ffffff;
+  --card: #f0f0f0;
+  --card-hover: #e0e0e0;
+  --text: #1a1a1a;
+  --muted: #666666;
+  --accent: #1a1a1a;
+  --toggle-bg: #e0e0e0;
+  --toggle-border: #cccccc;
+  --toggle-thumb: #1a1a1a;
+}
+
+/* Variáveis CSS para cores e valores reutilizáveis */
+:root {
+  --bg: #141414; /* Cor de fundo principal */
+  --card: #1f1f1f; /* Cor de fundo dos cartões de perfil */
+  --card-hover: #2a2a2a; /* Cor de fundo dos cartões no hover */
+  --text: #ffffff; /* Cor do texto */
+  --muted: #8a8a8a; /* Cor de texto secundário */
+  --accent: #E50914; /* Cor de destaque (vermelho Netflix) */
+}
+
+/* Reset global para garantir consistência */
+* {
+  box-sizing: border-box; /* Inclui padding e border na largura/altura total */
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove paddings padrão */
+}
+
+/* ===== ESTILOS DO LOGOTIPO NETFLIX ===== */
+.netflix-logo {
+  position: fixed; /* Posição fixa no topo */
+  top: 2rem; /* Distância do topo */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translateX(-50%); /* Ajusta para centralizar */
+  font-family: 'Bebas Neue', cursive; /* Fonte inspirada na Netflix */
+  font-size: clamp(2.5rem, 6vw, 4rem); /* Tamanho responsivo */
+  font-weight: 400; /* Peso da fonte */
+  color: #E50914; /* Cor vermelha Netflix fixa */
+  letter-spacing: 0.1em; /* Espaçamento entre letras */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para destaque */
+  z-index: 999; /* Garante que fique acima de outros elementos, mas abaixo do botão */
+  pointer-events: none; /* Não interfere com cliques */
+}
+
+/* ===== ESTILOS DO BOTÃO DE TEMA ===== */
+.theme-toggle {
+  position: fixed; /* Posição fixa na tela */
+  top: 2rem; /* Distância do topo */
+  right: 2rem; /* Distância da direita */
+  width: 70px; /* Largura maior para o toggle */
+  height: 35px; /* Altura */
+  border-radius: 17.5px; /* Raio para forma oval */
+  background-color: var(--toggle-bg); /* Cor de fundo */
+  border: 2px solid var(--toggle-border); /* Borda */
+  cursor: pointer; /* Cursor de ponteiro */
+  padding: 0; /* Remove padding */
+  display: flex; /* Layout flexbox */
+  align-items: center; /* Centraliza verticalmente */
+  transition: all 0.3s ease; /* Transição suave */
+  z-index: 1000; /* Garante que fique no topo */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Sombra leve */
+  overflow: hidden; /* Esconde overflow */
+}
+
+.theme-toggle:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Sombra aumenta */
+  transform: scale(1.05); /* Aumenta ligeiramente */
+}
+
+.theme-toggle:active {
+  transform: scale(0.98); /* Comprime ao clicar */
+}
+
+/* Track do toggle */
+.toggle-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+  transition: all 0.3s ease;
+}
+
+/* Thumb do toggle (parte móvel) */
+.toggle-thumb {
+  width: 29px;
+  height: 29px;
+  background-color: var(--toggle-thumb);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  left: 0;
+}
+
+/* Estado ativo do toggle (light mode) */
+.theme-toggle.active .toggle-thumb {
+  transform: translateX(35px); /* Move o thumb para a direita */
+  background-color: var(--toggle-thumb);
+}
+
+/* Ícone do tema */
+.theme-icon {
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+/* Animação do ícone */
+.theme-toggle:active .theme-icon {
+  transform: scale(0.8) rotate(20deg);
+}
+
+/* Estilos do corpo da página */
+body {
+  background: radial-gradient(
+    circle at top,
+    var(--bg-gradient-1) 0%,
+    var(--bg-gradient-2) 50%,
+    var(--bg-gradient-3) 100%
+  ); /* Fundo gradiente radial responsivo ao tema */
+  color: var(--text); /* Cor do texto */
+  font-family:
+    "Helvetica Neue", Helvetica, Arial, sans-serif; /* Família de fontes */
+  min-height: 100vh; /* Altura mínima da viewport */
+  display: flex; /* Layout flexbox */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  padding: 2rem; /* Espaçamento interno */
+  padding-top: 6rem; /* Espaço extra para o logotipo */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave ao mudar tema */
+}
+
+/* Estilos do elemento main */
+main {
+  width: min(900px, 100%); /* Largura máxima de 900px ou 100% se menor */
+  text-align: center; /* Alinhamento central do texto */
+}
+
+/* Estilos do título h1 */
+h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem); /* Tamanho de fonte responsivo */
+  font-weight: 700; /* Peso da fonte (negrito) */
+  letter-spacing: 0.06em; /* Espaçamento entre letras */
+  color: var(--text); /* Cor do texto */
+  margin-bottom: 1.5rem; /* Margem inferior */
+  text-transform: uppercase; /* Transforma texto em maiúsculo */
+  transition: color 0.3s ease; /* Transição suave na cor */
+}
+
+/* Estilos da lista de perfis */
+.profiles {
+  list-style: none; /* Remove marcadores da lista */
+  display: grid; /* Layout em grid */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(180px, 1fr)
+  ); /* Colunas responsivas */
+  gap: 0.8rem; /* Espaçamento entre itens */
+  justify-items: center; /* Centraliza itens horizontalmente */
+  padding: 0; /* Remove padding padrão */
+}
+
+/* Estilos de cada perfil */
+.profile {
+  width: 180px; /* Largura fixa */
+  padding: 1rem; /* Espaçamento interno */
+  background-color: transparent; /* Fundo transparente */
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.3s ease; /* Transições suaves incluindo tema */
+ 
+}
+
+/* Estilos do link dentro do perfil */
+.profile-link {
+  color: inherit; /* Herda cor do pai */
+  text-decoration: none; /* Remove sublinhado */
+  display: grid; /* Layout em grid */
+  place-items: center; /* Centraliza conteúdo */
+  cursor: pointer; /* Cursor de ponteiro */
+}
+
+/* Estilos no hover e foco */
+.profile:hover,
+.profile:focus-within {
+  transform: translateY(-4px) scale(1.02); /* Eleva e amplia levemente */
+
+}
+
+/* Estilos da imagem do perfil */
+.profile img {
+  width: 100%; /* Largura total */
+  aspect-ratio: 1/1; /* Proporção quadrada */
+  object-fit: cover; /* Corta imagem para caber */
+  border-radius: 1rem; /* Cantos arredondados */
+  margin-bottom: 0.85rem; /* Margem inferior */
+}
+
+/* Estilos do texto do perfil */
+.profile p,
+.profile figcaption {
+  font-size: 1rem; /* Tamanho da fonte */
+  font-weight: 600; /* Peso da fonte */
+  color: var(--text); /* Cor do texto */
+  margin: 0; /* Remove margens */
+  text-transform: uppercase; /* Maiúsculo */
+  letter-spacing: 0.04em; /* Espaçamento entre letras */
+  transition: color 0.3s ease; /* Transição suave na cor */
+}
+
+/* ===== ESTILOS DO BOTÃO GERENCIAR PERFIS ===== */
+.gerenciar {
+  margin-top: 3rem; /* Espaçamento superior para ficar mais abaixo */
+  text-align: center; /* Centraliza o botão */
+}
+
+.gerenciar-perfis {
+  background-color: transparent; /* Fundo transparente */
+  color: var(--text); /* Cor do texto */
+  border: 2px solid #ffffff; /* Contorno retangular branco */
+  padding: 0.75rem 2rem; /* Espaçamento interno */
+  font-size: 1rem; /* Tamanho da fonte */
+  font-weight: 600; /* Peso da fonte */
+  text-transform: uppercase; /* Maiúsculo */
+  letter-spacing: 0.04em; /* Espaçamento entre letras */
+  border-radius: 0.5rem; /* Cantos arredondados */
+  cursor: pointer; /* Cursor de ponteiro */
+  transition: all 0.3s ease; /* Transição suave */
+}
+
+.gerenciar-perfis:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo sutil no hover */
+  transform: translateY(-2px); /* Elevação leve */
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2); /* Sombra leve */
+}
+
+/* ===== MEDIA QUERIES - MOBILE FIRST APPROACH ===== */
+
+/* Extra Small (Mobile) - 320px a 480px */
+@media (max-width: 480px) {
+  .netflix-logo {
+    top: 1rem; /* Distância reduzida do topo */
+    font-size: clamp(1.8rem, 8vw, 2.5rem); /* Fonte menor */
+  }
+}
+
+  .theme-toggle {
+    top: 1rem; /* Distância reduzida */
+    right: 1rem; /* Distância reduzida */
+    width: 60px; /* Largura menor */
+    height: 30px; /* Altura menor */
+    border-radius: 15px; /* Raio ajustado */
+  }
+
+  .theme-toggle.active .toggle-thumb {
+    transform: translateX(30px); /* Movimento ajustado para mobile */
+  }
+
+  .toggle-thumb {
+    width: 24px; /* Thumb menor */
+    height: 24px; /* Thumb menor */
+  }
+
+  .theme-icon {
+    font-size: 0.8rem; /* Ícone menor */
+  }
+
+  body {
+    padding: 1rem; /* Padding reduzido */
+    padding-top: 4rem; /* Espaço para logotipo */
+    min-height: 100vh; /* Garante cobertura mínima da viewport */
+  }
+
+  main {
+    width: 100%; /* Largura total */
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2rem); /* Tamanho responsivo menor */
+    margin-bottom: 1rem; /* Margem reduzida */
+  }
+
+  .profiles {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em mobile */
+    gap: 0.5rem; /* Gap menor */
+  }
+
+  .profile {
+    width: 100%; /* Largura total do container */
+    min-width: 120px; /* Largura mínima */
+    padding: 0.75rem; /* Padding menor */
+  }
+
+  .profile img {
+    border-radius: 0.75rem; /* Cantos menos arredondados */
+    margin-bottom: 0.6rem; /* Menos espaço inferior */
+  }
+
+  .profile p,
+  .profile figcaption {
+    font-size: 0.85rem; /* Fonte menor */
+  }
+
+  .gerenciar {
+    margin-top: 2rem; /* Margem reduzida em mobile */
+  }
+
+  .gerenciar-perfis {
+    padding: 0.6rem 1.5rem; /* Padding menor */
+    font-size: 0.9rem; /* Fonte menor */
+  }
+
+/* Small (Landscape Mobile / Small Tablet) - 481px a 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 1.5rem; /* Padding moderado */
+    padding-top: 5rem; /* Espaço para logotipo */
+  }
+}
+
+  main {
+    width: 95%; /* Largura ligeiramente reduzida */
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem); /* Tamanho intermediário */
+    margin-bottom: 1.25rem;
+  }
+
+  .profiles {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    gap: 0.7rem; /* Gap moderado */
+  }
+
+  .profile {
+    width: 160px; /* Largura ligeiramente menor */
+    padding: 0.85rem;
+  }
+
+  .profile img {
+    border-radius: 0.9rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .profile p,
+  .profile figcaption {
+    font-size: 0.95rem;
+  }
+
+  .gerenciar {
+    margin-top: 2.5rem; /* Margem intermediária */
+  }
+
+/* Medium (Tablet) - 769px a 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .netflix-logo {
+    top: 1.5rem; /* Ajuste de posição */
+  }
+}
+
+  body {
+    padding: 2rem; /* Padding padrão */
+    padding-top: 6rem; /* Espaço para logotipo */
+  }
+
+  main {
+    width: 100%; /* Largura total */
+  }
+
+  h1 {
+    font-size: clamp(2rem, 3.5vw, 2.8rem); /* Tamanho maior */
+    margin-bottom: 1.5rem;
+  }
+
+  .profiles {
+    grid-template-columns: repeat(4, minmax(140px, 1fr)); /* 4 colunas */
+    gap: 0.9rem;
+  }
+
+  .profile {
+    width: auto; /* Auto para ocupar o espaço do grid */
+    padding: 1rem;
+  }
+
+  .profile img {
+    border-radius: 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .profile p,
+  .profile figcaption {
+    font-size: 0.95rem;
+  }
+
+  .gerenciar {
+    margin-top: 3rem; /* Margem padrão para tablet */
+  }
+
+/* Large (Desktop) - 1025px a 1440px */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  body {
+    padding: 2rem;
+    padding-top: 6rem; /* Espaço para logotipo */
+  }
+}
+
+  main {
+    width: 90%; /* Ligeiramente reduzido */
+    max-width: 1000px;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 3vw, 3rem); /* Tamanho grande */
+    margin-bottom: 2rem;
+  }
+
+  .profiles {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(180px, 1fr)
+    ); /* Automático com 180px min */
+    gap: 1rem; /* Gap maior */
+  }
+
+  .profile {
+    width: 180px;
+    padding: 1.1rem;
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease; /* Transição mais suave */
+  }
+
+  .profile:hover,
+  .profile:focus-within {
+    transform: translateY(-8px); /* Mais elevação */
+  }
+
+  .profile img {
+    border-radius: 1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .profile p,
+  .profile figcaption {
+    font-size: 1rem;
+  }
+
+  .gerenciar {
+    margin-top: 3.5rem; /* Margem maior em desktop */
+  }
+
+/* Extra Large (Desktop Grande) - 1441px+ */
+@media (min-width: 1441px) {
+  body {
+    padding: 3rem;
+    padding-top: 8rem; /* Espaço maior para logotipo */
+  }
+}
+
+  main {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  h1 {
+    font-size: 3.2rem; /* Máximo */
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.08em; /* Mais espaçamento */
+  }
+
+  .profiles {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    ); /* Itens maiores */
+    gap: 1.2rem; /* Gap bem maior */
+  }
+
+  .profile {
+    width: 200px;
+    padding: 1.25rem;
+  }
+
+  .profile:hover,
+  .profile:focus-within {
+    transform: translateY(-10px); /* Mais elevação */
+  }
+
+  .profile img {
+    border-radius: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .profile p,
+  .profile figcaption {
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .gerenciar {
+    margin-top: 4rem; /* Margem ainda maior em telas grandes */
+  }
+
+/* Orientação Landscape em dispositivos pequenos */
+@media (max-height: 500px) and (orientation: landscape) {
+  .netflix-logo {
+    top: 0.5rem; /* Posição ajustada */
+    font-size: 1.5rem; /* Fonte menor */
+  }
+}
+
+  body {
+    padding: 1rem;
+    padding-top: 3rem; /* Espaço reduzido */
+    min-height: auto;
+  }
+
+  h1 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+  }
+
+  .profiles {
+    gap: 0.5rem;
+  }
+
+  .profile {
+    padding: 0.65rem;
+  }
+
+  .profile img {
+    margin-bottom: 0.5rem;
+    border-radius: 0.6rem;
+  }
+
+  .gerenciar {
+    margin-top: 1.5rem; /* Margem reduzida para landscape */
+  }
+
+  .gerenciar-perfis {
+    padding: 0.5rem 1rem; /* Padding ainda menor */
+    font-size: 0.8rem; /* Fonte menor */
+  }
+
+/* Suporte para telas de retina (high DPI) */
+@media (min-width: 1920px) {
+  .netflix-logo {
+    font-size: 4.5rem; /* Fonte maior para telas grandes */
+  }
+}
+
+  body {
+    padding-top: 10rem; /* Espaço maior */
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  .profiles {
+    gap: 1.5rem;
+  }
+
+  .profile {
+    width: 220px;
+  }
+
+  .profile p,
+  .profile figcaption {
+    font-size: 1.2rem;
+  }
+
+  .gerenciar {
+    margin-top: 5rem; /* Margem ainda maior para telas muito grandes */
+  }

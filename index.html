@@ -1,0 +1,71 @@
+<!DOCTYPE html> <!-- Declara o tipo de documento como HTML5 -->
+<html lang="pt-br"> <!-- Define o idioma da página como português brasileiro -->
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura a viewport para dispositivos móveis -->
+    <title>Netflix</title> <!-- Título da página exibido na aba do navegador -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Ctext x='50%' y='60%' font-family='Arial, Helvetica, sans-serif' font-size='108' fill='%23E50914' font-weight='900' text-anchor='middle' dominant-baseline='middle'%3EN%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Vincula o arquivo de estilos CSS -->
+</head>
+<body> <!-- Corpo da página -->
+    <!-- Logotipo Netflix -->
+    <div class="netflix-logo">Netflix</div>
+
+    <!-- Botão para alternar tema -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar modo escuro/claro">
+        <div class="toggle-track">
+            <div class="toggle-thumb">
+                <span class="theme-icon"></span>
+            </div>
+        </div>
+    </button>
+
+    <main>  <!-- Conteúdo principal da página -->
+        <h1>Quem está assistindo?</h1> <!-- Título principal da seção -->
+        <ul class="profiles"> <!-- Lista não ordenada para os perfis -->
+            <li class="profile"> <!-- Item da lista representando um perfil -->
+                <a href="catalogo/catalogo.html" aria-label="Selecionar Gustavo" class="profile-link" data-perfil-nome="Gustavo" data-perfil-img="assets/perfil-6.jpg"> <!-- Link clicável com rótulo de acessibilidade -->
+                    <figure> <!-- Elemento semântico para agrupar imagem e legenda -->
+                       <img src="assets/perfil-6.jpg" alt="Perfil 1"> <!-- Imagem do perfil com texto alternativo -->
+                       <figcaption>Gustavo</figcaption> <!-- Legenda da imagem -->
+                     </figure>
+                </a>
+            </li>
+            <li class="profile"> <!-- Item da lista representando um perfil -->
+                <a href="catalogo/catalogo.html" aria-label="Selecionar Fernanda" class="profile-link" data-perfil-nome="Fernanda" data-perfil-img="assets/perfil-5.jpg"> <!-- Link clicável com rótulo de acessibilidade -->
+                    <figure> <!-- Elemento semântico para agrupar imagem e legenda -->
+                       <img src="assets/perfil-5.jpg" alt="Perfil 2"> <!-- Imagem do perfil com texto alternativo -->
+                       <figcaption>Fernanda</figcaption> <!-- Legenda da imagem -->
+                     </figure>
+                </a>
+            </li>
+            <li class="profile"> <!-- Item da lista representando um perfil -->
+                <a href="catalogo/catalogo.html" aria-label="Selecionar Perfil 3" class="profile-link" data-perfil-nome="Perfil 3" data-perfil-img="assets/perfil-4.jpg"> <!-- Link clicável com rótulo de acessibilidade -->
+                    <figure> <!-- Elemento semântico para agrupar imagem e legenda -->
+                       <img src="assets/perfil-4.jpg" alt="Perfil 3"> <!-- Imagem do perfil com texto alternativo -->
+                       <figcaption>Perfil 3</figcaption> <!-- Legenda da imagem -->
+                     </figure>
+                </a>
+            </li>
+            <li class="profile"> <!-- Item da lista representando um perfil -->
+                <a href="catalogo/catalogo.html" aria-label="Selecionar Perfil 4" class="profile-link" data-perfil-nome="Perfil 4" data-perfil-img="assets/perfil-7.jpg"> <!-- Link clicável com rótulo de acessibilidade -->
+                    <figure> <!-- Elemento semântico para agrupar imagem e legenda -->
+                       <img src="assets/perfil-7.jpg" alt="Perfil 3"> <!-- Imagem do perfil com texto alternativo -->
+                       <figcaption>Perfil 3</figcaption> <!-- Legenda da imagem -->
+                     </figure>
+                </a>
+            </li>
+        </ul>
+        <section class="gerenciar">
+            <button type="button" class="gerenciar-perfis">Gerenciar Perfis</button> <!-- Botão para gerenciar perfis -->
+        </section>
+
+    </main>
+
+    <!-- Script para ativar o tema escuro/claro -->
+    <script src="script.js"></script>
+</body>
+</html>
